@@ -1,24 +1,45 @@
-use std::io;
+
 fn main() {
-   //Generate the nth Fibonacci number.
-    println!("input n:");
-    let mut buffer = String::new();
-    io::stdin().read_line(&mut buffer).expect("exception");
-    println!("{}",fibonacci(buffer.trim().parse().expect("not integer")));
+   //Print the lyrics to the Christmas carol “The Twelve Days of Christmas,” taking advantage of the repetition in the song.
+   const DAYS:[&str;12] = 
+   ["первый","второй","третий"
+   ,"четвертый","пятый","шестой"
+   ,"седьмой","восьмой","девятый"
+   ,"десятый","одиннадцатый","двенадцатый"];
+   const GIFTS: [&str; 12] = [
+    "Одного цыплёнка\nв клетке золотой", // 1    
+    "Двух рукавичек",                          
+    "Трёх петушков",                           
+    "Четырёх скворцов",                        
+    "Пять золотых колец",                      
+    "Шесть гусей гогочут",                    
+    "Семь лебедей в пруду",                  
+    "Восемь доек с молоком",                 
+    "Девять дам танцуют",                      
+    "Десять скачущих лордов",                  
+    "Одиннадцать волынщиков",                 
+    "Двенадцать барабанщиков"// 12
+];
+
+
+for i in 0..12 {
+    if i == 1 {
+        println!("Во {} день Рождества\nПодарил мне дружок",DAYS[i]);
+    }
+    else{
+    println!("В {} день Рождества\nПодарил мне дружок",DAYS[i]);
+    }
+    for j in (0..=i).rev(){
+        print!("{}",GIFTS[j]);
+        if j == 0{
+            print!(".")
+        }
+        else
+        {
+            print!(",")
+        }
+        println!();
+        }
+    println!();
 }
-fn fibonacci(n:usize)->usize{
-
-    if n <=1{
-       return n;
-    }
-    let mut prev:usize = 0;
-    let mut curr:usize = 1;
-
-    for i in 2..=n {
-    let next = prev + curr;
-    println!("{}. {} + {} -> {}",i-2,prev,curr,next);
-    prev = curr;
-    curr = next;
-    }
-    curr
 }
